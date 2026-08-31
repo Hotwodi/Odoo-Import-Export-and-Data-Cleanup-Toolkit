@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iet_export_job_tree" model="ir.ui.view">
+        <field name="name">iet.export.job.tree</field>
+        <field name="model">iet.export.job</field>
+        <field name="arch" type="xml">
+            <tree string="Export Jobs">
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="export_format"/>
+                <field name="record_count"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'running'"
+                       decoration-success="state == 'done'"
+                       decoration-danger="state == 'failed'"/>
+                <field name="created_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_iet_export_job_form" model="ir.ui.view">
+        <field name="name">iet.export.job.form</field>
+        <field name="model">iet.export.job</field>
+        <field name="arch" type="xml">
+            <form string="Export Job">
+                <header>
+                    <button name="action_run_export" type="object" string="Run Export"
+                            class="oe_highlight" invisible="state not in ('draft', 'failed')"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                            invisible="state not in ('done', 'failed')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,running,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Job Name"/>
+                        <h1><field name="name" placeholder="e.g. Export Active Partners"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_name" placeholder="e.g. res.partner"/>
+                            <field name="export_format"/>
+                            <field name="record_count"/>
+                        </group>
+                        <group>
+                            <field name="created_by"/>
+                            <field name="created_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Configuration">
+                            <group>
+                                <field name="field_list" placeholder="Comma-separated field names, e.g. name, email, phone"/>
+                                <field name="filter_domain" placeholder='Domain expression, e.g. [("active", "=", True)]'/>
+                            </group>
+                        </page>
+                        <page string="Result" invisible="state != 'done'">
+                            <group>
+                                <field name="file_data" filename="file_name" readonly="1"/>
+                                <field name="file_name" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_iet_export_job" model="ir.actions.act_window">
+        <field name="name">Export Jobs</field>
+        <field name="res_model">iet.export.job</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first export job
+            </p>
+            <p>
+                Export data from any Odoo model to CSV, XLSX, or JSON format.
+            </p>
+        </field>
+    </record>
+</odoo>

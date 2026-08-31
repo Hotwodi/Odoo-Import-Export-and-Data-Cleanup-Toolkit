@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iet_cleanup_rule_tree" model="ir.ui.view">
+        <field name="name">iet.cleanup.rule.tree</field>
+        <field name="model">iet.cleanup.rule</field>
+        <field name="arch" type="xml">
+            <tree string="Cleanup Rules">
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="cleanup_type"/>
+                <field name="field_name"/>
+                <field name="records_cleaned"/>
+                <field name="is_active" widget="boolean_toggle"/>
+                <field name="last_run"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_iet_cleanup_rule_form" model="ir.ui.view">
+        <field name="name">iet.cleanup.rule.form</field>
+        <field name="model">iet.cleanup.rule</field>
+        <field name="arch" type="xml">
+            <form string="Cleanup Rule">
+                <header>
+                    <button name="action_run_cleanup" type="object" string="Run Cleanup"
+                            class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Rule Name"/>
+                        <h1><field name="name" placeholder="e.g. Trim Partner Names"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_name" placeholder="e.g. res.partner"/>
+                            <field name="cleanup_type"/>
+                            <field name="field_name" placeholder="e.g. name"/>
+                        </group>
+                        <group>
+                            <field name="is_active"/>
+                            <field name="records_cleaned"/>
+                            <field name="last_run"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_iet_cleanup_rule" model="ir.actions.act_window">
+        <field name="name">Cleanup Rules</field>
+        <field name="res_model">iet.cleanup.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first cleanup rule
+            </p>
+            <p>
+                Define rules to trim whitespace, remove duplicates, fix case, validate emails, normalize phones, and fill defaults.
+            </p>
+        </field>
+    </record>
+</odoo>

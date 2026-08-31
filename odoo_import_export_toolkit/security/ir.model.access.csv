@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_iet_export_job_user,iet.export.job.user,model_iet_export_job,base.group_user,1,1,1,1
+access_iet_import_job_user,iet.import.job.user,model_iet_import_job,base.group_user,1,1,1,1
+access_iet_cleanup_rule_user,iet.cleanup.rule.user,model_iet_cleanup_rule,base.group_user,1,1,1,1
+access_iet_data_validation_user,iet.data.validation.user,model_iet_data_validation,base.group_user,1,1,1,1

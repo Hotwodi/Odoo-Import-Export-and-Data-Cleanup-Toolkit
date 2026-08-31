@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iet_import_job_tree" model="ir.ui.view">
+        <field name="name">iet.import.job.tree</field>
+        <field name="model">iet.import.job</field>
+        <field name="arch" type="xml">
+            <tree string="Import Jobs">
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="imported_count"/>
+                <field name="skipped_count"/>
+                <field name="error_count"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'running'"
+                       decoration-success="state == 'done'"
+                       decoration-danger="state == 'failed'"/>
+                <field name="created_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_iet_import_job_form" model="ir.ui.view">
+        <field name="name">iet.import.job.form</field>
+        <field name="model">iet.import.job</field>
+        <field name="arch" type="xml">
+            <form string="Import Job">
+                <header>
+                    <button name="action_run_import" type="object" string="Run Import"
+                            class="oe_highlight" invisible="state not in ('draft', 'failed')"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                            invisible="state not in ('done', 'failed')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,running,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Job Name"/>
+                        <h1><field name="name" placeholder="e.g. Import Partners CSV"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_name" placeholder="e.g. res.partner"/>
+                            <field name="file_data" filename="file_name"/>
+                            <field name="file_name"/>
+                        </group>
+                        <group>
+                            <field name="imported_count"/>
+                            <field name="skipped_count"/>
+                            <field name="error_count"/>
+                            <field name="created_by"/>
+                            <field name="created_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Configuration">
+                            <group>
+                                <field name="mapping_config" placeholder='JSON mapping, e.g. {"Name": "name", "Email": "email"}'/>
+                            </group>
+                        </page>
+                        <page string="Error Log" invisible="not error_log">
+                            <group>
+                                <field name="error_log" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_iet_import_job" model="ir.actions.act_window">
+        <field name="name">Import Jobs</field>
+        <field name="res_model">iet.import.job</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first import job
+            </p>
+            <p>
+                Import data into any Odoo model from CSV or JSON files with configurable field mapping.
+            </p>
+        </field>
+    </record>
+</odoo>

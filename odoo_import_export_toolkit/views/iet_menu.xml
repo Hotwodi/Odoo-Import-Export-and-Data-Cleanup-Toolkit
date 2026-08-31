@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_iet_root"
+              name="Import/Export Toolkit"
+              web_icon="odoo_import_export_toolkit,static/description/icon.png"
+              sequence="20"/>
+
+    <menuitem id="menu_iet_export_jobs"
+              name="Export Jobs"
+              parent="menu_iet_root"
+              action="action_iet_export_job"
+              sequence="10"/>
+
+    <menuitem id="menu_iet_import_jobs"
+              name="Import Jobs"
+              parent="menu_iet_root"
+              action="action_iet_import_job"
+              sequence="20"/>
+
+    <menuitem id="menu_iet_cleanup_rules"
+              name="Cleanup Rules"
+              parent="menu_iet_root"
+              action="action_iet_cleanup_rule"
+              sequence="30"/>
+
+    <menuitem id="menu_iet_data_validation"
+              name="Data Validation"
+              parent="menu_iet_root"
+              action="action_iet_data_validation"
+              sequence="40"/>
+</odoo>

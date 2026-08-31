@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iet_data_validation_tree" model="ir.ui.view">
+        <field name="name">iet.data.validation.tree</field>
+        <field name="model">iet.data.validation</field>
+        <field name="arch" type="xml">
+            <tree string="Data Validation Results">
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="field_name"/>
+                <field name="validation_type"/>
+                <field name="invalid_count"/>
+                <field name="total_count"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'pending'"
+                       decoration-success="state == 'fixed'"
+                       decoration-muted="state == 'ignored'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_iet_data_validation_form" model="ir.ui.view">
+        <field name="name">iet.data.validation.form</field>
+        <field name="model">iet.data.validation</field>
+        <field name="arch" type="xml">
+            <form string="Data Validation">
+                <header>
+                    <button name="action_run_validation" type="object" string="Run Validation"
+                            class="oe_highlight" invisible="state == 'fixed'"/>
+                    <button name="action_mark_fixed" type="object" string="Mark as Fixed"
+                            invisible="state != 'pending'"/>
+                    <button name="action_mark_ignored" type="object" string="Ignore"
+                            invisible="state != 'pending'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="pending,fixed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Validation Name"/>
+                        <h1><field name="name" placeholder="e.g. Validate Partner Emails"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_name" placeholder="e.g. res.partner"/>
+                            <field name="field_name" placeholder="e.g. email"/>
+                            <field name="validation_type"/>
+                        </group>
+                        <group>
+                            <field name="invalid_count"/>
+                            <field name="total_count"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="AI Suggestions" invisible="not ai_suggestions">
+                            <group>
+                                <field name="ai_suggestions" readonly="1" widget="text"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_iet_data_validation" model="ir.actions.act_window">
+        <field name="name">Data Validation</field>
+        <field name="res_model">iet.data.validation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first validation check
+            </p>
+            <p>
+                Validate data for required fields, format, range, uniqueness, and references with AI-powered suggestions.
+            </p>
+        </field>
+    </record>
+</odoo>
