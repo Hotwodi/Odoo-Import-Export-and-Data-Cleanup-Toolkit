@@ -34,5 +34,5 @@ Powered by SoftaiDev.
         'views/iet_data_validation_views.xml',
         'views/iet_menu.xml',
     ],
-    'images': ['static/description/icon.png'],
+    'images': ['static/description/cover.png'],
 }
