@@ -4,7 +4,7 @@
         <field name="name">iet.export.job.tree</field>
         <field name="model">iet.export.job</field>
         <field name="arch" type="xml">
-            <tree string="Export Jobs">
+            <list string="Export Jobs">
                 <field name="name"/>
                 <field name="model_name"/>
                 <field name="export_format"/>
@@ -15,7 +15,7 @@
                        decoration-success="state == 'done'"
                        decoration-danger="state == 'failed'"/>
                 <field name="created_date"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -75,7 +75,7 @@
     <record id="action_iet_export_job" model="ir.actions.act_window">
         <field name="name">Export Jobs</field>
         <field name="res_model">iet.export.job</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first export job

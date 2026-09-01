@@ -12,7 +12,7 @@ class IetExportJob(models.Model):
     _name = 'iet.export.job'
     _description = 'Import/Export Toolkit - Export Job'
     _order = 'created_date desc'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Job Name', required=True, tracking=True)
     model_name = fields.Char(string='Model', required=True, help='Technical name of the model to export.')

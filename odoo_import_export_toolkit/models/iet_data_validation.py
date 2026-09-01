@@ -8,7 +8,7 @@ class IetDataValidation(models.Model):
     _name = 'iet.data.validation'
     _description = 'Import/Export Toolkit - Data Validation Result'
     _order = 'name'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Validation Name', required=True, tracking=True)
     model_name = fields.Char(string='Model', required=True, help='Technical name of the model being validated.')

@@ -4,7 +4,7 @@
         <field name="name">iet.data.validation.tree</field>
         <field name="model">iet.data.validation</field>
         <field name="arch" type="xml">
-            <tree string="Data Validation Results">
+            <list string="Data Validation Results">
                 <field name="name"/>
                 <field name="model_name"/>
                 <field name="field_name"/>
@@ -15,7 +15,7 @@
                        decoration-info="state == 'pending'"
                        decoration-success="state == 'fixed'"
                        decoration-muted="state == 'ignored'"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -70,7 +70,7 @@
     <record id="action_iet_data_validation" model="ir.actions.act_window">
         <field name="name">Data Validation</field>
         <field name="res_model">iet.data.validation</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first validation check

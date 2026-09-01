@@ -9,7 +9,7 @@ class IetCleanupRule(models.Model):
     _name = 'iet.cleanup.rule'
     _description = 'Import/Export Toolkit - Data Cleanup Rule'
     _order = 'name'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Rule Name', required=True, tracking=True)
     model_name = fields.Char(string='Model', required=True, help='Technical name of the model to clean up.')
